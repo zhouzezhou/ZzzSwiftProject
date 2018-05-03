@@ -61,24 +61,67 @@ class Circle: NameShape
 
 class Square :NameShape
 {
-    var sideLenght: Double
+    var sideLength: Double
     
-    init(sideLenght: Double, name: String)
+    init(sideLength: Double, name: String)
     {
-        self.sideLenght = sideLenght
+        print("Square init !")
+        
+        self.sideLength = sideLength
         super.init(name: name)
         numberOfSides = 4
     }
     
     func area() -> Double{
-        return sideLenght * sideLenght
+        return sideLength * sideLength
     }
     
     override func simpleDescription() -> String {
-        return "A square with sides of lenght \(sideLenght)"
+        return "A square with sides of lenght \(sideLength)"
     }
     
 }
+
+class EquilateralTriangle: NameShape {
+    var sideLength: Double = 0.0
+    
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 3
+    }
+    
+    var perimeter: Double {
+        get {
+            return 3.0 * sideLength
+        }
+        set {
+            sideLength = newValue / 3.0
+        }
+    }
+    
+    override func simpleDescription() -> String {
+        return "An equilateral triangle with sides of length \(sideLength)."
+    }
+}
+
+class TriangleAndSquare {
+    var triangle: EquilateralTriangle {
+        willSet {
+            square.sideLength = newValue.sideLength
+        }
+    }
+    var square: Square {
+        willSet {
+            triangle.sideLength = newValue.sideLength
+        }
+    }
+    init(size: Double, name: String) {
+        square = Square(sideLength: size, name: name)
+        triangle = EquilateralTriangle(sideLength: size, name: name)
+    }
+}
+
 
 class ViewController: UIViewController {
 
@@ -91,7 +134,9 @@ class ViewController: UIViewController {
         
 //        functionMothed()
         
-        classMothed()
+//        classMothed()
+        
+        enumAndStruct()
         
         
     }
@@ -101,24 +146,151 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    func enumAndStruct()
+    {
+        enum Rank: Int {
+            case ace
+            case zzz = 15
+            case two, three, four, five, six, seven, eight, nine, ten, jack, queen, king
+//            case jack, queen, king
+//            func simpleDescriptionaa() -> String {
+//                switch self {
+//                case .ace:
+//                    return "0 value"
+//                case .jack:
+//                    return "jack"
+//                case .queen:
+//                    return "queen"
+//                case .king:
+//                    return "king"
+//                default:
+//                    return String(self.rawValue)
+//                }
+//
+//            }
+        }
+        
+        let ace = Rank.ace
+        let aceRawValue = ace.rawValue // 原始值
+        
+        let six = Rank.six
+        let sixRawValue = six.rawValue // 原始值
+
+//        let enumFunc = Rank.simpleDescription(jack)
+//        print(Rank.jack.simpleDescriptionaa())
+        print(ace)
+//        print(ace.simpleDescriptionaa())
+        print(aceRawValue)
+        
+        print(six)
+        print(sixRawValue)
+        
+        func compareEnum(firstValue:Rank, secondValue:Rank) -> Bool
+        {
+            if firstValue == secondValue
+            {
+                return true
+            }
+            else
+            {
+                return false
+            }
+        }
+        
+        print(compareEnum(firstValue: ace, secondValue: six))
+//        print(enumFunc)
+        
+        if let convertedRank = Rank(rawValue: 3) {
+            let threeDescription = convertedRank
+            print(threeDescription)
+        }
+        
+        print()
+        
+        
+        enum Suit {
+            // spades黑桃
+            case spades, hearts, diamonds, clubs// 梅花
+            func simpleDescription() -> String {
+                switch self {
+                case .spades:
+                    return "spades"
+                case .hearts:
+                    return "hearts"
+                case .diamonds:
+                    return "diamonds"
+                case .clubs:
+                    return "clubs"
+                }
+            }
+            
+            func color() -> String {
+                switch self {
+                case .spades, .clubs:
+                    return "black"
+                default:
+                    return "red"
+                }
+                
+//                if self == .spades || self == .clubs || self == .hearts
+//                {
+//                    return "black"
+//                }
+//                else
+//                {
+//                    return "red"
+//                }
+            }
+        }
+        let hearts = Suit.hearts
+        let heartsDescription = hearts.simpleDescription()
+        
+        print(hearts.color())
+        
+        print()
+        
+        
+    }
+    
     func classMothed() {
         
         
-        var shape = Shape()
-        print(shape.numberOfSides)
-        print(shape.numberOfPeople)
+//        var shape = Shape()
+//        print(shape.numberOfSides)
+//        print(shape.numberOfPeople)
+//
+//        shape.numberOfSides = 7
+//        var shapeStr = shape.simpleDescription()
+//        print(shapeStr)
+//
+//        let test = Square(sideLength: 5.2, name: "my test square")
+//        print(test.area())
+//        print(test.simpleDescription())
+//
+//        var circle = Circle(radius: 5, name: "Zzz planit a circle")
+//        print(circle.area())
+//        print(circle.simpleDescription())
+//
+//
+//        var triangle = EquilateralTriangle(sideLength: 3.1, name: "a triangle")
+//        print(triangle.perimeter)
+//        triangle.perimeter = 9.9
+//        print(triangle.sideLength)
+
+        print()
         
-        shape.numberOfSides = 7
-        var shapeStr = shape.simpleDescription()
-        print(shapeStr)
+        var triangleAndSquare = TriangleAndSquare(size: 10, name: "another test shape")
+        print(triangleAndSquare.square.sideLength)
+        print(triangleAndSquare.triangle.sideLength)
+        triangleAndSquare.square = Square(sideLength: 50, name: "larger square")
+        print(triangleAndSquare.triangle.sideLength)
         
-        let test = Square(sideLenght: 5.2, name: "my test square")
-        print(test.area())
-        print(test.simpleDescription())
+        let optionalSquare: Square? = Square(sideLength: 2.5, name: "optional square")
+        let sideLength = optionalSquare?.sideLength
+        print(sideLength)
         
-        var circle = Circle(radius: 5, name: "Zzz planit a circle")
-        print(circle.area())
-        print(circle.simpleDescription())
+        
+        
         
         
     }
