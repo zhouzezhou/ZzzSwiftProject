@@ -6,121 +6,13 @@
 //  Copyright © 2018年 zzz. All rights reserved.
 //
 
+protocol ExampleProtocol {
+    var simpleDescription: String { get }
+    mutating func adjust()
+}
+
+
 import UIKit
-
-class Shape {
-    
-    var numberOfSides = 0
-    func simpleDescription() -> String {
-        return "A shape with \(numberOfSides) sides."
-    }
-    
-    let numberOfPeople = 3
-    func peopleNumberDescription(number: Int) -> String{
-        return "meeting people number is \(number)"
-    }
-    
-    
-}
-
-class NameShape
-{
-    var numberOfSides: Int = 0
-    var name: String
-    
-    init(name: String) {
-        self.name = name
-    }
-    
-    func simpleDescription() -> String {
-        return "A shape with \(numberOfSides) sides."
-    }
-}
-
-class Circle: NameShape
-{
-    var radius: Double
-    
-    init(radius: Double, name: String) {
-        self.radius = radius
-        super.init(name: name)
-        
-    }
-    
-    func area() -> Double
-    {
-        return 3.14 * radius * radius
-    }
-    
-    override func simpleDescription() -> String {
-        return "A Circle with radius \(radius) lenght."
-    }
-    
-}
-
-
-class Square :NameShape
-{
-    var sideLength: Double
-    
-    init(sideLength: Double, name: String)
-    {
-        print("Square init !")
-        
-        self.sideLength = sideLength
-        super.init(name: name)
-        numberOfSides = 4
-    }
-    
-    func area() -> Double{
-        return sideLength * sideLength
-    }
-    
-    override func simpleDescription() -> String {
-        return "A square with sides of lenght \(sideLength)"
-    }
-    
-}
-
-class EquilateralTriangle: NameShape {
-    var sideLength: Double = 0.0
-    
-    init(sideLength: Double, name: String) {
-        self.sideLength = sideLength
-        super.init(name: name)
-        numberOfSides = 3
-    }
-    
-    var perimeter: Double {
-        get {
-            return 3.0 * sideLength
-        }
-        set {
-            sideLength = newValue / 3.0
-        }
-    }
-    
-    override func simpleDescription() -> String {
-        return "An equilateral triangle with sides of length \(sideLength)."
-    }
-}
-
-class TriangleAndSquare {
-    var triangle: EquilateralTriangle {
-        willSet {
-            square.sideLength = newValue.sideLength
-        }
-    }
-    var square: Square {
-        willSet {
-            triangle.sideLength = newValue.sideLength
-        }
-    }
-    init(size: Double, name: String) {
-        square = Square(sideLength: size, name: name)
-        triangle = EquilateralTriangle(sideLength: size, name: name)
-    }
-}
 
 
 class ViewController: UIViewController {
@@ -136,8 +28,9 @@ class ViewController: UIViewController {
         
 //        classMothed()
         
-        enumAndStruct()
+//        enumAndStruct()
         
+        protocolAndExtension()
         
     }
 
@@ -145,29 +38,59 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func protocolAndExtension()
+    {
+        
+        
+        class SimpleClass: ExampleProtocol {
+            var simpleDescription: String = "A very simple class."
+            var anotherProperty: Int = 69105
+            func adjust() {
+                simpleDescription += "  Now 100% adjusted."
+            }
+        }
+        var a = SimpleClass()
+        a.adjust()
+        let aDescription = a.simpleDescription
+        print(aDescription)
+        
+        struct SimpleStructure: ExampleProtocol {
+            var simpleDescription: String = "A simple structure"
+            mutating func adjust() {
+                simpleDescription += " (adjusted)"
+            }
+        }
+        var b = SimpleStructure()
+        b.adjust()
+        let bDescription = b.simpleDescription
+        print(bDescription)
+        
+        
+    }
+    
 
     func enumAndStruct()
     {
         enum Rank: Int {
             case ace
-            case zzz = 15
             case two, three, four, five, six, seven, eight, nine, ten, jack, queen, king
 //            case jack, queen, king
-//            func simpleDescriptionaa() -> String {
-//                switch self {
-//                case .ace:
-//                    return "0 value"
-//                case .jack:
-//                    return "jack"
-//                case .queen:
-//                    return "queen"
-//                case .king:
-//                    return "king"
-//                default:
-//                    return String(self.rawValue)
-//                }
-//
-//            }
+            func simpleDescriptionaa() -> String {
+                switch self {
+                case .ace:
+                    return "ace"
+                case .jack:
+                    return "jack"
+                case .queen:
+                    return "queen"
+                case .king:
+                    return "king"
+                default:
+                    return String(self.rawValue)
+                }
+
+            }
         }
         
         let ace = Rank.ace
@@ -208,9 +131,10 @@ class ViewController: UIViewController {
         print()
         
         
-        enum Suit {
+        enum Suit:Int {
             // spades黑桃
-            case spades, hearts, diamonds, clubs// 梅花
+            case spades
+            case hearts, diamonds, clubs// 梅花
             func simpleDescription() -> String {
                 switch self {
                 case .spades:
@@ -248,6 +172,80 @@ class ViewController: UIViewController {
         print(hearts.color())
         
         print()
+        
+        
+        enum ServerResponse {
+            case result(String, String)
+            case failure(String)
+            case timeout(String)
+        }
+        
+        let result = ServerResponse.result("6:00 am", "8:09 pm")
+//        let failure = ServerResponse.failure("Out of cheese.")
+        
+        switch result {
+        case let .result(sunrise, sunset):
+            print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+        case let .failure(message):
+            print("Failure...  \(message)")
+        case let .timeout(msg):
+            print("request is time out ,reason is \(msg)")
+        }
+        
+        let convertedRank = Rank(rawValue: 3)
+        
+        struct Card {
+            var rank: Rank
+            var suit: Suit
+            func simpleDescription() -> String {
+                return "The \(rank.simpleDescriptionaa()) of \(suit.simpleDescription())"
+            }
+            
+            func createAPackCard() -> Array<Card>
+            {
+                var dic = Array<Card>()
+                
+                for j in 0...3
+                {
+                    if let aSuit = Suit(rawValue: j)
+                    {
+                        for i in 0...12
+                        {
+                            if let aRank = Rank(rawValue: i)
+                            {
+                                let ACard = Card(rank: aRank, suit: aSuit)
+                                dic.append(ACard)
+                                print(ACard.simpleDescription())
+                            }
+                        }
+                    }
+                }
+                return dic
+            }
+            
+        }
+        
+        let threeOfSpades = Card(rank: .three, suit: .spades)
+        let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+        
+        print(threeOfSpadesDescription)
+        
+        let aPackCard = threeOfSpades.createAPackCard()
+//        print(aPackCard)
+        
+        enum DateStr:String
+        {
+            case monday, tuesday, wednesday, thriday, friday, saturday, sunday
+        }
+        
+        let day = DateStr.monday
+        print(day)
+        
+        let day2:DateStr? = DateStr(rawValue:"tuesday")
+        print(day2 ?? "no value")
+        
+        
+        
         
         
     }
@@ -516,6 +514,122 @@ class ViewController: UIViewController {
         print(sortedNumbers)
     }
     
+}
+
+
+
+class Shape {
+    
+    var numberOfSides = 0
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
+    
+    let numberOfPeople = 3
+    func peopleNumberDescription(number: Int) -> String{
+        return "meeting people number is \(number)"
+    }
+    
+    
+}
+
+class NameShape
+{
+    var numberOfSides: Int = 0
+    var name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    func simpleDescription() -> String {
+        return "A shape with \(numberOfSides) sides."
+    }
+}
+
+class Circle: NameShape
+{
+    var radius: Double
+    
+    init(radius: Double, name: String) {
+        self.radius = radius
+        super.init(name: name)
+        
+    }
+    
+    func area() -> Double
+    {
+        return 3.14 * radius * radius
+    }
+    
+    override func simpleDescription() -> String {
+        return "A Circle with radius \(radius) lenght."
+    }
+    
+}
+
+
+class Square :NameShape
+{
+    var sideLength: Double
+    
+    init(sideLength: Double, name: String)
+    {
+        print("Square init !")
+        
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 4
+    }
+    
+    func area() -> Double{
+        return sideLength * sideLength
+    }
+    
+    override func simpleDescription() -> String {
+        return "A square with sides of lenght \(sideLength)"
+    }
+    
+}
+
+class EquilateralTriangle: NameShape {
+    var sideLength: Double = 0.0
+    
+    init(sideLength: Double, name: String) {
+        self.sideLength = sideLength
+        super.init(name: name)
+        numberOfSides = 3
+    }
+    
+    var perimeter: Double {
+        get {
+            return 3.0 * sideLength
+        }
+        set {
+            sideLength = newValue / 3.0
+        }
+    }
+    
+    override func simpleDescription() -> String {
+        return "An equilateral triangle with sides of length \(sideLength)."
+    }
+}
+
+class TriangleAndSquare {
+    var triangle: EquilateralTriangle {
+        willSet {
+            square.sideLength = newValue.sideLength
+        }
+    }
+    var square: Square {
+        willSet {
+            triangle.sideLength = newValue.sideLength
+        }
+    }
+    init(size: Double, name: String) {
+        square = Square(sideLength: size, name: name)
+        triangle = EquilateralTriangle(sideLength: size, name: name)
+    }
 }
 
 
