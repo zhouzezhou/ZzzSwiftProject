@@ -11,6 +11,22 @@ protocol ExampleProtocol {
     mutating func adjust()
 }
 
+extension Int: ExampleProtocol {
+    var simpleDescription: String {
+        return "The number \(self)"
+    }
+    mutating func adjust() {
+        self += 42
+    }
+}
+
+extension Double
+{
+    mutating func absoluteValue()
+    {
+        self = fabs(self)
+    }
+}
 
 import UIKit
 
@@ -24,19 +40,196 @@ class ViewController: UIViewController {
         print("hello world !")
 //        NSLog("hello world !")
         
+        // 概览
 //        functionMothed()
         
 //        classMothed()
         
 //        enumAndStruct()
         
-        protocolAndExtension()
+//        protocolAndExtension()
+        
+//        errorFunc()
+        
+//        Generic()   // 泛型
+        // 泛型进程设计是进程设计语言的一种风格或范式。允许进程员在强类型进程设计语言中编写代码时使用一些以后才指定的类型，在实例化时（instantiate）作为参数指明这些类型。
+        
+        // 指南
+        print("z1zz")
+        
+        let minValue = Int32.min
+        let maxValue = Int32.max
+        
+        print(minValue)
+        print(maxValue)
+        
+        let hexadecimalDouble = 12 + 0x0.3p0
+        print(hexadecimalDouble)
+        //
+        
+        let paddedDouble = 000123.456
+        let oneMillion = 1_000_000
+        let justOverOneMillion = 00___001_0__00_000.00_______0_000_1
+        
+        print(oneMillion)
+        print(justOverOneMillion)
+        
+        
+        
+        let tooBig: Int8 = Int8.max
+        
+        
+        typealias AudioSample = UInt16
+        
+        print(AudioSample.min)
+        
+        
+        let possibleNumber = "123"
+        let convertedNumber = Int(possibleNumber)
+        print(convertedNumber ?? "no value")
+        
+        
+        var surveyAnswer: String?
+        // surveyAnswer is automatically set to nil
+        
+        print(surveyAnswer)
+        
+        
+        if convertedNumber != nil {
+            print("convertedNumber has an integer value of \(convertedNumber!).")
+        }
+        
+        let possibleString: String? = "An optional string."
+        let forcedString: String = possibleString! // requires an exclamation mark
+        
+        let assumedString: String! = "An implicitly unwrapped optional string."
+        let implicitString: String = assumedString // no need for an exclamation mark
+        
+        
+        print()
+        
+        let age = -3
+//        assert(age >= 0, "A person's age cannot be less than zero")
+        // this causes the assertion to trigger, because age is not >= 0
+        
+        
+//        if age > 10 {
+//            print("You can ride the roller-coaster or the ferris wheel.")
+//        } else if age > 0 {
+//            print("You can ride the ferris wheel.")
+//        } else {
+//            assertionFailure("A person's age can't be less than zero.")
+//        }
+        
+        precondition(age > 0, "Index must be greater than zero.")
+        
+        fatalError("还没有完成，完成时将我删除！")
         
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func Generic()
+    {
+        
+        
+        func anyCommonElements<T: Sequence, U: Sequence>(_ lhs: T, _ rhs: U) -> [T.Iterator.Element]
+            where T.Iterator.Element: Equatable, T.Iterator.Element == U.Iterator.Element {
+                var commonElements = [T.Iterator.Element]()
+                for lhsItem in lhs {
+                    for rhsItem in rhs {
+                        if lhsItem == rhsItem {
+//                            return true
+                            commonElements.append(lhsItem)
+                        }
+                    }
+                }
+                return commonElements
+        }
+        print(anyCommonElements([1, 2, 3], [3, 1]))
+        
+        
+    }
+    
+    func errorFunc(){
+        
+        enum PrinterError: Error
+        {
+            case outOfPaper
+            case noToner
+            case onFire
+        }
+        
+        enum PrinterError2: Error
+        {
+            case outOfPaper
+            case noToner
+            case onFire
+            case onFireZzz
+        }
+        
+        func send(job: Int, toPrinter printerName: String) throws -> String {
+            if printerName == "Never Has Toner" {
+                throw PrinterError.noToner
+            }
+            else if printerName == "onFire" {
+                throw PrinterError.onFire
+            }
+            else if printerName == "onFireZzz" {
+                throw PrinterError2.onFireZzz
+            }
+            else
+            {
+                throw PrinterError.outOfPaper
+            }
+            return "Job sent"
+        }
+        
+        // mothed 1
+//        do {
+//            let printerResponse = try send(job: 1040, toPrinter: "Never Has Toner")
+//            print(printerResponse)
+//        } catch {
+//            print(error)
+//        }
+        
+        do {
+            let printerResponse = try send(job: 1440, toPrinter: "Never Has Toner")
+            print(printerResponse)
+        } catch PrinterError.onFire {
+            print("I'll just put this over here, with the rest of the fire.")
+        } catch let printerError as PrinterError {
+            print("Printer error: \(printerError).")
+        } catch {
+            print(error)
+        }
+        
+        
+        let printerSuccess = try? send(job: 1884, toPrinter: "Mergenthaler")
+        let printerFailure = try? send(job: 1885, toPrinter: "Never Has Toner")
+        
+        print()
+        
+        
+        var fridgeIsOpen = false
+        let fridgeContent = ["milk", "eggs", "leftovers"]
+        
+        func fridgeContains(_ food: String) -> Bool {
+            fridgeIsOpen = true
+            defer {
+                fridgeIsOpen = false
+            }
+            
+            let result = fridgeContent.contains(food)
+            return result
+        }
+        fridgeContains("banana")
+        print(fridgeIsOpen)
     }
     
     func protocolAndExtension()
@@ -65,6 +258,77 @@ class ViewController: UIViewController {
         b.adjust()
         let bDescription = b.simpleDescription
         print(bDescription)
+        
+        print()
+        
+        enum DateStr:Int, ExampleProtocol
+        {
+            case monday = 1
+            case tuesday, wednesday, thursday, friday, saturday, sunday
+            
+            var simpleDescription: String
+            {
+                get{
+                    switch self {
+                    case .monday:
+                        return "monday"
+                    default:
+                        return String(self.rawValue)
+                    }
+                }
+            }
+            
+            mutating func adjust() {
+                switch self {
+                case let .friday:
+                    self = .friday
+                    // 其它的都变成monday
+                default:
+                    self = .monday
+                }
+            }
+            
+        }
+        
+        var monday = DateStr.monday
+        print(monday.simpleDescription)
+        monday.adjust()
+        print(monday.simpleDescription)
+        
+        
+        var friday = DateStr.friday
+        print(friday.simpleDescription)
+        friday.adjust()
+        print(friday.simpleDescription)
+        
+        var tuesday = DateStr.tuesday
+        print(tuesday.simpleDescription)
+        tuesday.adjust()
+        print(tuesday.simpleDescription)
+        
+        
+        print()
+        
+        print(7.simpleDescription)
+        
+        var num = 7
+        num.adjust()
+        print(num.simpleDescription)
+        
+        print()
+        
+        var myDoubleValue = -10.4
+        myDoubleValue.absoluteValue()
+        print(myDoubleValue)
+        
+        var myDoubleValue2 = 21.4
+        myDoubleValue2.absoluteValue()
+        print(myDoubleValue2)
+        
+        
+        let protocolValue: ExampleProtocol = a
+        print(protocolValue.simpleDescription)
+//         print(protocolValue.anotherProperty) // Uncomment to see the error
         
         
     }
