@@ -2,12 +2,45 @@
 
 import UIKit
 
-var str = "Hello, playground"
+let threeDoubleQuotes = """
 
-//print("hello world !")
+   This string starts with a line feed.
+               It also ends with a line feed.
+
+ """
+
+print(threeDoubleQuotes)
 
 
-//NSLog("hello world !")
+var emptyString = "abc"               // empty string literal
+var anotherEmptyString = String()  // initializer syntax
 
 
-let explicitFloat:Float = 4
+
+anotherEmptyString = emptyString
+anotherEmptyString = "Zzz"
+
+print(emptyString)
+print(anotherEmptyString)
+
+for c in "Dog!?" {
+    print(c)
+}
+
+
+let catCharacters: [Character] = ["C", "a", "t", "!", "?"]
+let catString = String(catCharacters)
+print(catString)
+
+let multiplier = 3
+let message = "\(multiplier) times \(16 + 9 * 415) is \(2 * 2.5)"
+print(message)
+
+
+
+
+
+
+
+
+

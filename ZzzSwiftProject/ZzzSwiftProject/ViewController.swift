@@ -54,76 +54,9 @@ class ViewController: UIViewController {
 //        Generic()   // 泛型
         // 泛型进程设计是进程设计语言的一种风格或范式。允许进程员在强类型进程设计语言中编写代码时使用一些以后才指定的类型，在实例化时（instantiate）作为参数指明这些类型。
         
-        // 指南
-        print("z1zz")
+//        guideBaseContent()
         
-        let minValue = Int32.min
-        let maxValue = Int32.max
-        
-        print(minValue)
-        print(maxValue)
-        
-        let hexadecimalDouble = 12 + 0x0.3p0
-        print(hexadecimalDouble)
-        //
-        
-        let paddedDouble = 000123.456
-        let oneMillion = 1_000_000
-        let justOverOneMillion = 00___001_0__00_000.00_______0_000_1
-        
-        print(oneMillion)
-        print(justOverOneMillion)
-        
-        
-        
-        let tooBig: Int8 = Int8.max
-        
-        
-        typealias AudioSample = UInt16
-        
-        print(AudioSample.min)
-        
-        
-        let possibleNumber = "123"
-        let convertedNumber = Int(possibleNumber)
-        print(convertedNumber ?? "no value")
-        
-        
-        var surveyAnswer: String?
-        // surveyAnswer is automatically set to nil
-        
-        print(surveyAnswer)
-        
-        
-        if convertedNumber != nil {
-            print("convertedNumber has an integer value of \(convertedNumber!).")
-        }
-        
-        let possibleString: String? = "An optional string."
-        let forcedString: String = possibleString! // requires an exclamation mark
-        
-        let assumedString: String! = "An implicitly unwrapped optional string."
-        let implicitString: String = assumedString // no need for an exclamation mark
-        
-        
-        print()
-        
-        let age = -3
-//        assert(age >= 0, "A person's age cannot be less than zero")
-        // this causes the assertion to trigger, because age is not >= 0
-        
-        
-//        if age > 10 {
-//            print("You can ride the roller-coaster or the ferris wheel.")
-//        } else if age > 0 {
-//            print("You can ride the ferris wheel.")
-//        } else {
-//            assertionFailure("A person's age can't be less than zero.")
-//        }
-        
-        precondition(age > 0, "Index must be greater than zero.")
-        
-        fatalError("还没有完成，完成时将我删除！")
+        guideOperator()
         
     }
     
@@ -132,6 +65,110 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func guideOperator()
+    {
+        
+//        let intMaxAdd1 = 9223372036854775807 + 1
+        
+        
+        let tempInt = -3
+        
+        print(tempInt)
+        
+        
+        
+        if (102, "b") == (102, "b" )
+        {
+            print(true)
+            
+        }
+        else
+        {
+            print(false)
+        }
+        
+        
+        
+        
+        
+    }
+    
+    func guideBaseContent()
+    {
+    
+        // 指南 - 基础内容
+        print("z1zz")
+    
+        let minValue = Int32.min
+        let maxValue = Int32.max
+    
+        print(minValue)
+        print(maxValue)
+    
+        let hexadecimalDouble = 12 + 0x0.3p0
+        print(hexadecimalDouble)
+        //
+    
+        let paddedDouble = 000123.456
+        let oneMillion = 1_000_000
+        let justOverOneMillion = 00___001_0__00_000.00_______0_000_1
+    
+        print(oneMillion)
+        print(justOverOneMillion)
+    
+    
+    
+        let tooBig: Int8 = Int8.max
+    
+    
+        typealias AudioSample = UInt16
+    
+        print(AudioSample.min)
+    
+    
+        let possibleNumber = "123"
+        let convertedNumber = Int(possibleNumber)
+        print(convertedNumber ?? "no value")
+    
+    
+        var surveyAnswer: String?
+        // surveyAnswer is automatically set to nil
+    
+        print(surveyAnswer)
+    
+    
+        if convertedNumber != nil {
+        print("convertedNumber has an integer value of \(convertedNumber!).")
+        }
+    
+        let possibleString: String? = "An optional string."
+        let forcedString: String = possibleString! // requires an exclamation mark
+    
+        let assumedString: String! = "An implicitly unwrapped optional string."
+        let implicitString: String = assumedString // no need for an exclamation mark
+    
+    
+        print()
+    
+        let age = -3
+        //        assert(age >= 0, "A person's age cannot be less than zero")
+        // this causes the assertion to trigger, because age is not >= 0
+    
+    
+        //        if age > 10 {
+        //            print("You can ride the roller-coaster or the ferris wheel.")
+        //        } else if age > 0 {
+        //            print("You can ride the ferris wheel.")
+        //        } else {
+        //            assertionFailure("A person's age can't be less than zero.")
+        //        }
+    
+        precondition(age > 0, "Index must be greater than zero.")
+    
+        fatalError("还没有完成，完成时将我删除！")
+    
     }
     
     func Generic()
