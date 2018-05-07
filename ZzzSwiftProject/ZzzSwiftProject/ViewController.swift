@@ -56,7 +56,14 @@ class ViewController: UIViewController {
         
 //        guideBaseContent()
         
-        guideOperator()
+//        guideOperator()
+        
+//        guideString()
+        
+//        collectionType()
+        
+        repeatFunc()
+        
         
     }
     
@@ -66,6 +73,170 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func repeatFunc()
+    {
+        let minutes = 60
+        let minuteInterval = 5
+        for _ in stride(from: 0, to: minutes, by: minuteInterval) {
+            print("z")
+        }
+        
+        
+        let anotherCharacter: Character = "a"
+        switch anotherCharacter {
+        case "a":
+            fallthrough
+        case "A":
+            print("The letter A")
+        default:
+            print("Not the letter A")
+        }
+        
+        
+        
+    }
+    
+    func collectionType()
+    {
+        var shoppingList = ["milk", "eggs", "Baking Powder", "Chocolate Spread", "Cheese", "Butter", "Other"]
+        print(shoppingList)
+        
+        shoppingList[3...5] = ["Bananas", "Apples"]
+        print(shoppingList)
+        
+        for item in shoppingList {
+            print(item)
+        }
+        
+        
+        var letters = Set<Character>()
+        print("letters is of type Set<Character> with \(letters.count) items.")
+        
+        letters.insert("a")
+        print(letters)
+        
+        letters = []
+        print(letters)
+        
+        var dic = ["zzz" : "today"]
+        
+    }
+    
+    
+    func guideString()
+    {
+        let wiseWords = "\"Imagination is more important than knowledge\" - Einstein"
+        // "Imagination is more important than knowledge" - Einstein
+        let dollarSign = "\u{24}" // $, Unicode scalar U+0024
+        let blackHeart = "\u{2665}" // ♥, Unicode scalar U+2665
+        let sparklingHeart = "\u{1F496}" // ?, Unicode scalar U+1F496
+        
+        print(wiseWords)
+        print(dollarSign)
+        print(blackHeart)
+        print(sparklingHeart)
+        
+        
+        let eAcute: Character = "\u{E9}"
+        let combinedEAcute: Character = "\u{65}\u{301}"
+        
+        print(eAcute)
+        print(combinedEAcute)
+        print()
+        print("\u{65}")
+        print("\u{301}")
+        
+        print("\u{1F1FA}\u{1F1F8}")
+//        print("\u{80dc}\u{20DD}")
+//        print("\u{524d}\u{20DD}")
+//        print("\u{662f}\u{20DD}")
+//        print("\u{8c01}\u{20DD}")
+        
+        
+//        \u8521\u80dc\u524d\u8bf4\u4f60\u6765\u4e86
+        
+        
+        var word = "cafe"
+        print("the number of characters in \(word) is \(word.count)")
+        // Prints "the number of characters in cafe is 4"
+        
+        word += "  \u{301}"    // COMBINING ACUTE ACCENT, U+0301
+        
+        print("the number of characters in \(word) is \(word.count)")
+        // Prints "the number of characters in café is 4"
+        
+        
+        
+        let greeting = "Guten Tag!"
+        print(greeting[greeting.startIndex])
+        // G
+        print(greeting[greeting.index(before: greeting.endIndex)])
+        // !
+        print(greeting[greeting.index(after: greeting.startIndex)])
+        // u
+        let index = greeting.index(greeting.startIndex, offsetBy: 7)
+        print(greeting[index])
+        // a
+        
+        for index in greeting.indices {
+            print("\(greeting[index])", terminator: "")
+        }
+        // Prints "G u t e n   T a g ! "
+        
+        
+        print()
+        print()
+        
+        var welcome = "hello"
+        print(welcome)
+        
+        welcome.insert("!", at: welcome.endIndex)
+        // welcome now equals "hello!"
+        print(welcome)
+        
+        welcome.insert(contentsOf:" there", at: welcome.index(before: welcome.endIndex))
+        print(welcome)
+        
+        
+        welcome.remove(at: welcome.index(before: welcome.endIndex))
+        print(welcome)
+        
+        let range = welcome.index(welcome.endIndex, offsetBy: -6)..<welcome.endIndex
+        welcome.removeSubrange(range)
+        print(welcome)
+        
+        
+        let greeting2 = "Hello, world!"
+        let index2 = greeting2.index(of: ",") ?? greeting2.endIndex
+        let beginning = greeting2[..<index2]
+        // beginning is "Hello"
+        
+        // Convert the result to a String for long-term storage.
+        let newString = String(beginning)
+        
+        let dogString = "Dog‼🐶"
+        for codeUnit in dogString.utf8 {
+            print("\(codeUnit) ", terminator: "")
+        }
+        print("")
+        
+        for scalar in dogString.unicodeScalars {
+            print("\(scalar.value) ", terminator: "")
+        }
+        print("")
+        
+        
+        print(dogString.distance(from: dogString.startIndex, to: dogString.index(of: "g") ?? dogString.endIndex))
+        
+        print(dogString.count)
+        
+        
+     
+        
+    }
+    
     
     func guideOperator()
     {
