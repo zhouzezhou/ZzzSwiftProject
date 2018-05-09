@@ -64,7 +64,11 @@ class ViewController: UIViewController {
         
 //        repeatFunc()
         
-        functions()
+//        functions()
+        
+//        closure()
+        
+        enumerations()
         
     }
     
@@ -73,6 +77,55 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func enumerations()
+    {
+        
+    }
+
+    
+    class SomeClass {
+        
+        var completionHandlers: [() -> Void] = []
+        func someFunctionWithEscapingClosure(completionHandler: @escaping () -> Void) {
+            completionHandlers.append(completionHandler)
+        }
+        
+        func someFunctionWithNonescapingClosure(closure: () -> Void) {
+            closure()
+        }
+        
+        var x = 10
+        func doSomething() {
+            someFunctionWithEscapingClosure { self.x = 100 }
+            someFunctionWithNonescapingClosure { x = 200 }
+        }
+    }
+    
+    // customersInLine is ["Ewa", "Barry", "Daniella"]
+    func serve(customer customerProvider: @autoclosure () -> String) {
+        print("Now serving \(customerProvider())!")
+    }
+    
+    func closure()
+    {
+        let instance = SomeClass()
+        instance.doSomething()
+        print(instance.x)
+        // Prints "200"
+        
+        instance.completionHandlers.first?()
+        print()
+        print(instance.completionHandlers.count)
+        print(instance.x)
+        // Prints "100"
+        
+        print()
+        var customersInLine = ["Chris", "Alex", "Ewa", "Barry", "Daniella"]
+        serve(customer: customersInLine.remove(at: 0))
+        // Prints "Now serving Ewa!"
+        print(customersInLine)
     }
     
     
