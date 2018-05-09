@@ -62,8 +62,9 @@ class ViewController: UIViewController {
         
 //        collectionType()
         
-        repeatFunc()
+//        repeatFunc()
         
+        functions()
         
     }
     
@@ -74,6 +75,26 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func functions()
+    {
+        
+        
+        func swapTwoInts(_ a: inout Int, _ b: inout Int) {
+            let temporaryA = a
+            a = b
+            b = temporaryA
+        }
+        
+        var someInt = 3
+        var anotherInt = 107
+        swapTwoInts(&someInt, &anotherInt)
+        print("someInt is now \(someInt), and anotherInt is now \(anotherInt)")
+        
+        
+        
+        
+    }
     
     func repeatFunc()
     {
@@ -95,6 +116,29 @@ class ViewController: UIViewController {
         }
         
         
+        print()
+        
+        func greet(person: [String: String]) {
+            guard let name = person["name"] else {
+                return
+            }
+            
+            print("Hello \(name)!")
+            
+            guard let location = person["location"] else {
+                print("I hope the weather is nice near you.")
+                return
+            }
+            
+            print("I hope the weather is nice in \(location).")
+        }
+        
+        greet(person:["name1": "John"])
+        // prints "Hello John!"
+        // prints "I hope the weather is nice near you."
+        greet(person:["name": "Jane", "location": "Cupertino"])
+        // prints "Hello Jane!"
+        // prints "I hope the weather is nice in Cupertino."
         
     }
     
