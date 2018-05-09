@@ -68,8 +68,9 @@ class ViewController: UIViewController {
         
 //        closure()
         
-        enumerations()
+//        enumerations()
         
+        classesandStructures();
     }
     
     
@@ -77,6 +78,47 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    struct Resolution {
+        var width = 0
+        var height = 0
+    }
+    
+    class VideoMode {
+        var resolution = Resolution()
+        var interlaced = false
+        var frameRate = 0.0
+        var name: String?
+    }
+    
+    
+    func classesandStructures()
+    {
+        // 类是引用类型
+        let hd = Resolution(width: 1920, height: 1080)
+        
+        let tenEighty = VideoMode()
+        tenEighty.resolution = hd
+        tenEighty.interlaced = true
+        tenEighty.name = "1080i"
+        tenEighty.frameRate = 25.0
+        
+        let alsoTenEighty = tenEighty
+        alsoTenEighty.frameRate = 30.0
+        
+        print("The frameRate property of tenEighty is now \(tenEighty.frameRate)")
+        // prints "The frameRate property of tenEighty is now 30.0"
+        
+        /*
+         注意 tenEighty和 alsoTenEighty都被声明为常量。然而，你仍然能改变 tenEighty.frameRate和 alsoTenEighty.frameRate因为 tenEighty和 alsoTenEighty常量本身的值不会改变。 tenEighty和 alsoTenEighty本身是并没有存储 VideoMode实例—相反，它们两者都在后台指向了 VideoMode实例。这是 VideoMode的 frameRate参数在改变而不是引用 VideoMode的常量的值在改变。
+         */
+        
+        if tenEighty === alsoTenEighty {
+            print("tenEighty and alsoTenEighty refer to the same VideoMode instance.")
+        }
+        // prints "tenEighty and alsoTenEighty refer to the same VideoMode instance."
+        
     }
     
     func enumerations()
