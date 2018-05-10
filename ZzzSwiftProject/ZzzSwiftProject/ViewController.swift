@@ -70,7 +70,11 @@ class ViewController: UIViewController {
         
 //        enumerations()
         
-        classesandStructures();
+//        classesandStructures();
+        
+        property()
+        
+        
     }
     
     
@@ -78,6 +82,33 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    class DataImporter {
+        
+        //DataImporter is a class to import data from an external file.
+        //The class is assumed to take a non-trivial amount of time to initialize.
+        
+        var fileName = "data.txt"
+        // the DataImporter class would provide data importing functionality here
+    }
+    
+    class DataManager {
+        lazy var importer = DataImporter()
+        var data = [String]()
+        // the DataManager class would provide data management functionality here
+    }
+    
+    func property()
+    {
+        
+        let manager = DataManager()
+        manager.data.append("Some data")
+        manager.data.append("Some more data")
+        print(manager.data)
+        print()
+        
+        print(manager.importer.fileName)
     }
     
     struct Resolution {
