@@ -72,7 +72,14 @@ class ViewController: UIViewController {
         
 //        classesandStructures();
         
-        property()
+//        property()
+        
+//        methods()
+        
+//        subscripts()
+        
+        inheritance()
+        
         
         
     }
@@ -82,6 +89,87 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    class Vehicle {
+        var currentSpeed = 0.0
+        var description: String {
+            return "traveling at \(currentSpeed) miles per hour"
+        }
+        func makeNoise() {
+            print("Vehicle make noise")
+            // do nothing - an arbitrary vehicle doesn't necessarily make a noise
+        }
+    }
+    
+//    class Bicycle: Vehicle {
+//        var hasBasket = false
+//    }
+    
+    class Train: Vehicle {
+        
+        override func makeNoise() {
+            super.makeNoise()
+            
+            print("Choo Choo")
+        }
+    }
+    
+    class Car: Vehicle {
+        var gear = 1
+        
+//        override var currentSpeed:Double
+//        {
+//            set{
+//                super.currentSpeed = newValue
+//            }
+//
+//            get{
+//                return super.currentSpeed
+//            }
+//        }
+
+//        override var currentSpeed:Double
+//            {
+//            didSet{
+//
+//            }
+//
+//            willSet{
+//
+//            }
+//        }
+        
+        
+        override var description: String {
+            return super.description + " in gear \(gear)"
+        }
+    }
+    
+    class AutomaticCar: Car {
+        override var currentSpeed: Double {
+            didSet {
+                gear = Int(currentSpeed / 10.0) + 1
+            }
+        }
+    }
+    
+    func inheritance()
+    {
+        let train = Train()
+        
+        train.makeNoise()
+        
+    }
+    
+    func subscripts()
+    {
+        
+    }
+    
+    func methods()
+    {
+        
     }
     
     class DataImporter {
@@ -109,6 +197,40 @@ class ViewController: UIViewController {
         print()
         
         print(manager.importer.fileName)
+        
+        class StepCounter {
+            var totalSteps: Int = 0 {
+                willSet(newTotalSteps) {
+                    print("About to set totalSteps to \(newTotalSteps)")
+                }
+                didSet {
+                    if totalSteps >= oldValue  {
+                        print("Added \(totalSteps - oldValue) steps")
+                    }
+                }
+            }
+            
+            func tomorrowStepGuess(_ todayStep: inout Int)
+            {
+                print("tomorrow step guess is \(todayStep + 100) step")
+            }
+            
+        }
+        
+        let stepCounter = StepCounter()
+        stepCounter.totalSteps = 200
+        // About to set totalSteps to 200
+        // Added 200 steps
+        stepCounter.totalSteps = 360
+        // About to set totalSteps to 360
+        // Added 160 steps
+        stepCounter.totalSteps = 896
+        // About to set totalSteps to 896
+        // Added 536 steps
+        
+        // 如果你以输入输出形式参数传一个拥有观察者的属性给函数， willSet 和 didSet 观察者一定会被调用。
+        stepCounter.tomorrowStepGuess(&stepCounter.totalSteps)
+        
     }
     
     struct Resolution {
