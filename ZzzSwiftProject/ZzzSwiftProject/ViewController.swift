@@ -78,9 +78,9 @@ class ViewController: UIViewController {
         
 //        subscripts()
         
-        inheritance()
+//        inheritance()
         
-        
+        initialization()
         
     }
     
@@ -90,6 +90,16 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func initialization()
+    {
+        
+        
+        
+        
+    }
+    
+    
     
     class Vehicle {
         var currentSpeed = 0.0
