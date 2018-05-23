@@ -1,0 +1,143 @@
+1. Swift 概览 -> 简单值 -> 第7行
+“比如下面的例子” 应该为：“比如上面的例子”
+
+英文原文：“In the example above”
+
+
+2. Swift 概览 -> 简单值
+“使用 \() 来把一个浮点计算包含进字符串，然后再在一个欢迎语句中插入某人的名字。”
+之后
+中文翻译里缺少下面这段的翻译：
+Use three double quotation marks (""") for strings that take up multiple lines. Indentation at the start of each quoted line is removed, as long as it matches the indentation of the closing quotation marks. For example:
+		let quotation = """
+		I said "I have \(apples) apples."
+		And then I said "I have \(apples + oranges) pieces of fruit."
+		"""
+
+2018年 5月 2日 星期三 12时21分09秒 CST
+
+- - - 
+
+3. 字符串和字符 -> 访问和修改字符串 -> 字符串索引
+最后一个代码块里第一行代码：
+greeting.characters.indices
+这里的characters方法在swift4.1里已经被遗弃(deprecated)，英文原文里已经修改为for index in greeting.indices
+
+以及下一个代码块里的welcome.insert(contentsOf:" there".characters, at: welcome.index(before: welcome.endIndex))里也需要去掉characters方法
+英文原文：welcome.insert(contentsOf: " there", at: welcome.index(before: welcome.endIndex))
+
+
+
+4. 控制流 -> 控制转移语句 -> Continue
+下面代码示例与英文原文不同。
+英文原文：
+let puzzleInput = "great minds think alike"
+var puzzleOutput = ""
+let charactersToRemove: [Character] = ["a", "e", "i", "o", "u", " "]
+for character in puzzleInput {
+    if charactersToRemove.contains(character) {
+        continue
+    } else {
+        puzzleOutput.append(character)
+    }
+}
+print(puzzleOutput)
+// Prints "grtmndsthnklk"
+
+- - - 
+
+5. 控制流 -> 提前退出
+第一段代码里2个greet(["name": "John”])方法的调用时缺少形参名person
+英文原文：
+greet(person: ["name": "John"])
+// Prints "Hello John!"
+// Prints "I hope the weather is nice near you."
+greet(person: ["name": "Jane", "location": "Cupertino"])
+// Prints "Hello Jane!"
+// Prints "I hope the weather is nice in Cupertino."
+
+		
+6. swift指南 -> 函数 -> 无返回值的函数
+第一句中的“叫做 sayGoodbye(_:)”在英文原文里不存在
+英文原文：
+Functions are not required to define a return type. Here’s a version of the greet(person:) function, which prints its own String value rather than returning it:
+
+
+7. swift指南 -> 函数 -> 无返回值的函数
+第2个代码块里第一个函数里“return string.characters.count”应为“return string.count”
+英文原文：
+func printAndCount(string: String) -> Int {
+    print(string)
+    return string.count
+}
+
+
+
+
+8. swift指南 ->  闭包 -> 尾随闭包
+倒数第4段文字里的结尾缺少一个“0”字
+应为：…510中的0)
+
+
+
+9. swift指南 ->  类和结构体 -> 定义语法
+倒数第2段文字的开头“上面这个这个例子”，多了一个“这个”
+
+10. swift指南 ->  属性 -> 延迟存储属性
+最后一段代码块上的文字：
+“因为它被 lazy 修饰符所标记，只有在 importer 属性第一次被访问时才会创建 DataManager 实例”
+应当为
+“因为它被 lazy 修饰符所标记，只有在 importer 属性第一次被访问时才会创建 DataImporter 实例”
+(“DataManager”改为 “DataImporter”)
+
+英文原文：
+Because it is marked with the lazy modifier, the DataImporter instance for the importer property is only created when the importer property is first accessed, such as when its filename property is queried:
+
+11. swift指南 ->  属性 -> 查询和设置类型属性
+第一句：
+“类型属性使用点语法来查询和设置，与类型属性一致。”
+应为：
+“类型属性使用点语法来查询和设置，与实例属性一致。”
+
+英文原文：Type properties are queried and set with dot syntax, just like instance properties. 
+
+
+12. swift指南 ->  方法 -> 类型方法
+倒数第2段文字，第2句
+“它同事提供了一个叫做 complete(level:)的方法，这个方法在玩家完成一个特定等级的时候会被调用。”
+“同事” 应为“同时”
+
+13. swift指南 ->  下标 -> 下标的语法
+第1段第1句：
+下表脚本允许你通过在实例名后面的方括号内写一个或多个值对该类的实例进行查询。它的语法类似于实例方法和和计算属性。
+“下表” 应为 “下标”
+“它的语法类似于实例方法和和计算属性。”里多了一个“和”字
+
+14. swift指南 ->  下标 -> 下标用法
+最后的“注意”里面，最后多了一个“不”字
+
+
+15.  swift指南 ->  初始化 ->  值类型的初始化器委托
+倒数第3段文字：
+“第二个 Rect 初始化器， init(origin:size) ”
+这里size后面少了一个冒号，应为：
+“第二个 Rect 初始化器， init(origin:size:) ”
+
+
+16.  swift指南 ->  初始化 ->  指定初始化器和便捷初始化器
+最后一段文字最后一句里的“时候时候”多了一个“时候”。
+
+17. swift指南 ->  初始化 -> 通过闭包和函数来设置属性的默认值
+倒数第3段文字里，第一句话的结尾
+“它是一个包含100个 Bool 值的数组”
+应为
+“它是一个包含64个 Bool 值的数组”
+
+英文原文：which is an array of 64 Bool values. 
+
+
+
+
+
+
+

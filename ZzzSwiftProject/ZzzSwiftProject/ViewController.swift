@@ -91,12 +91,80 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    class Food {
+        var name: String
+        init(name: String) {
+            self.name = name
+            print(1)
+        }
+        convenience init() {
+            print(2)
+            self.init(name: "[Unnamed]")
+        }
+    }
+    
+    
+    class RecipeIngredient: Food {
+        var quantity: Int
+        init(name: String, quantity: Int) {
+            print(3)
+            self.quantity = quantity
+            super.init(name: name)
+        }
+        override convenience init(name: String) {
+            print(4)
+            self.init(name: name, quantity: 1)
+        }
+    }
+    
+    
+    class Document {
+        var name: String?
+        // this initializer creates a document with a nil name value
+        init() {print(1)}
+        // this initializer creates a document with a non-empty name value
+        init?(name: String) {
+            print(2)
+            self.name = name
+            if name.isEmpty { return nil }
+        }
+    }
+    
+    class AutomaticallyNamedDocument: Document {
+        override init() {
+            print(3)
+            super.init()
+            self.name = "[Untitled]"
+        }
+        override init(name: String) {
+            print(4)
+            super.init()
+            if name.isEmpty {
+                self.name = "[Untitled]"
+            } else {
+                self.name = name
+            }
+        }
+    }
+    
+    class UntitledDocument: Document {
+        override init() {
+            print(5)
+            super.init(name: "[Untitled]")!
+        }
+    }
+    
     func initialization()
     {
+//        var food = RecipeIngredient()
+//        print(food.name)
+        
+        let doc1 = AutomaticallyNamedDocument(name: "Zzz")
+        print((doc1.name != nil) ? doc1.name! : "null")
         
         
-        
-        
+        let doc2 = UntitledDocument()
+        print(doc2.name != nil ? doc2.name! : "null")
     }
     
     
