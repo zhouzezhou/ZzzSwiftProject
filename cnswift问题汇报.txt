@@ -124,16 +124,22 @@ Because it is marked with the lazy modifier, the DataImporter instance for the i
 “第二个 Rect 初始化器， init(origin:size:) ”
 
 
-16.  swift指南 ->  初始化 ->  指定初始化器和便捷初始化器
+16.swift指南 ->  初始化 ->  指定初始化器和便捷初始化器
 最后一段文字最后一句里的“时候时候”多了一个“时候”。
 
-17. swift指南 ->  初始化 -> 通过闭包和函数来设置属性的默认值
+17.swift指南 ->  初始化 -> 通过闭包和函数来设置属性的默认值
 倒数第3段文字里，第一句话的结尾
 “它是一个包含100个 Bool 值的数组”
 应为
 “它是一个包含64个 Bool 值的数组”
 
 英文原文：which is an array of 64 Bool values. 
+
+
+
+18.swift指南 -> 反初始化
+第1段第2句里
+“是用” -> “使用”
 
 
 
