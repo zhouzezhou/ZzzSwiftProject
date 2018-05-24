@@ -141,6 +141,8 @@ Because it is marked with the lazy modifier, the DataImporter instance for the i
 第1段第2句里
 “是用” -> “使用”
 
+19.swift指南 -> 自动引用计数
+自动引用计数 章节在英文原文里被调整到了swift指南下的倒数第4章
 
 
 
