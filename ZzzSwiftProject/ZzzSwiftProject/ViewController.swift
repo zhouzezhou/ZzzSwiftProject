@@ -82,7 +82,13 @@ class ViewController: UIViewController {
         
 //        initialization()
         
-        automaticReferenceCounting()
+//        automaticReferenceCounting()
+        
+//        optionalChaining()
+        
+        errorHandling()
+        
+        
     }
     
     
@@ -91,6 +97,34 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    class Person2 {
+        var residence: Residence2?
+    }
+    
+    class Residence2 {
+        var numberOfRooms = 1
+    }
+    
+    
+    func optionalChaining()
+    {
+        
+        let john = Person2()
+        
+//        john.residence = Residence2()
+        
+        if let roomCount = john.residence?.numberOfRooms {
+            print("John's residence has \(roomCount) room(s).")
+        } else {
+            print("Unable to retrieve the number of rooms.")
+        }
+        
+        
+    }
+    
+    
+    
     
 //    class Person {
 //        let name: String
@@ -116,11 +150,36 @@ class ViewController: UIViewController {
     class Apartment {
         let unit: String
         init(unit: String) { self.unit = unit }
-        var tenant: Person?
+        weak var tenant: Person?
         deinit
         {
             print("Apartment \(unit) is being deinitialized")
         }
+    }
+    
+    class HTMLElement {
+        
+        let name: String
+        let text: String?
+        
+        lazy var asHTML: () -> String = {
+            [unowned self] in
+            if let text = self.text {
+                return "<\(self.name)>\(text)</\(self.name)>"
+            } else {
+                return "<\(self.name) />"
+            }
+        }
+        
+        init(name: String, text: String? = nil) {
+            self.name = name
+            self.text = text
+        }
+        
+        deinit {
+            print("\(name) is being deinitialized")
+        }
+        
     }
     
     func automaticReferenceCounting()
@@ -155,10 +214,21 @@ class ViewController: UIViewController {
         john!.apartment = unit4A
         unit4A!.tenant = john
         
-        john = nil
-        unit4A = nil
+//        john = nil
+//        unit4A = nil
+//        print(john!.apartment != nil ? john!.apartment! : "nil")
+//        print(unit4A!.tenant != nil ? unit4A!.tenant! : "nil")
 
         print("mothed will end")
+        
+        var paragraph: HTMLElement? = HTMLElement(name: "p", text: "hello, world")
+        print(paragraph!.asHTML())
+        // prints "<p>hello, world</p>"
+        
+        paragraph = nil
+        // prints "p is being deinitialized"
+        
+        
     }
     
     
