@@ -98,6 +98,12 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func errorHandling()
+    {
+        
+    }
+    
+    
     class Person2 {
         var residence: Residence2?
     }
