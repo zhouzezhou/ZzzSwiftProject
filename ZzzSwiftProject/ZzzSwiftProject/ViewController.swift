@@ -86,10 +86,14 @@ class ViewController: UIViewController {
         
 //        optionalChaining()
         
-        errorHandling()
+//        errorHandling()
         
-        extensions()
+//        extensions()
         
+        // 泛型
+        generics()
+        
+        memorySafety()
         
     }
     
@@ -98,6 +102,16 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func memorySafety()
+    {
+        
+    }
+    
+    func generics()
+    {
+        
     }
     
     func extensions()

@@ -152,6 +152,19 @@ Because it is marked with the lazy modifier, the DataImporter instance for the i
 最后一段文字第2句“比如说，上面 PurchasedSnack 结构体的...”
 里面的“上面”就在为“下面”
 
+22. swift指南 -> 协议 -> 委托
+倒数第2段代码上的文字“它次那了 DiceGameDelegate 协议：”
+应为
+“它采纳了 DiceGameDelegate 协议：”
+吧！
+
+23.swift指南 -> 协议 -> 可选协议要求
+倒数第4段文字的开头“下边的代码创建了一个新的 Counter 实例；”
+“下边的代码”应为“上边的代码”
+
+23.swift指南 -> 内存安全性 -> 输入输出形式参数的访问冲突
+第2个代码块里的最后两行注释重复了“// stepSize is now 2”，需要删掉一行。
+
 
 
 
