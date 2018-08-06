@@ -95,10 +95,81 @@ class ViewController: UIViewController {
         
         memorySafety()
         
+        
+        //test
+        let ace = Rank.ace
+        let aceRawValue = ace.rawValue
+        print(aceRawValue)
+        
+        let otherRank = Rank.seven
+        let compareResult = ace.compareValue(otherRank: otherRank)
+        print("\(ace.simpleDescription()) \(compareResult) \(otherRank.simpleDescription())")
+        
+        let convertedRank = Rank(rawValue: 0)
+        print(convertedRank ?? "null")
     }
     
-    
+    enum Rank: Int {
+        case ace = 1
+        case two, three, four, five, six, seven, eight, nine, ten
+        case jack, queen, king
+        func simpleDescription() -> String {
+            switch self {
+            case .ace:
+                return "ace"
+            case .jack:
+                return "jack"
+            case .queen:
+                return "queen"
+            case .king:
+                return "king"
+            default:
+                return String(self.rawValue)
+            }
+        }
+        
+        func compareValue(otherRank: Rank) -> String {
+            if(self == otherRank)
+            {
+                return "等于"
+            }
+            else if(self.rawValue < otherRank.rawValue)
+            {
+                return "小于"
+            }
+            else
+            {
+                return "大于"
+            }
+        }
+    }
 
+    enum Suit {
+        case spades, hearts, diamonds, clubs
+        func simpleDescription() -> String {
+            switch self {
+            case .spades:
+                return "spades"
+            case .hearts:
+                return "hearts"
+            case .diamonds:
+                return "diamonds"
+            case .clubs:
+                return "clubs"
+            }
+        }
+    }
+    
+    struct Card {
+        var rank: Rank
+        var suit: Suit
+        func simpleDescription() -> String {
+            return "The \(rank.simpleDescription()) of \(suit.simpleDescription())"
+        }
+        
+
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
